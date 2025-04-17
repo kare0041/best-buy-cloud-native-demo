@@ -1,36 +1,124 @@
-# Algonquin Pet Store (On Steroids)
-Welcome to the Algonquin Pet Store (On Steroids) application.
+# Best Buy Cloud-Native Application Demo - Final Lab Assignment CST8915
 
-This sample demo app consists of a group of containerized microservices that can be easily deployed into a Kubernetes cluster. This is meant to show a realistic scenario using a polyglot architecture, event-driven design, and common open source back-end services (eg - RabbitMQ, MongoDB). The application also leverages OpenAI's models to generate product descriptions and images. This can be done using either [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/overview) or [OpenAI](https://openai.com/).
+## 📦 Project Overview
 
-This application is inspired by Azure Kubernetes Service (AKS) quickstart demo [Azure Kubernetes Service (AKS) Docs](https://learn.microsoft.com/en-us/azure/aks/).
+This cloud-native application simulates Best Buy’s online store using a microservices architecture. The application supports product browsing, ordering, admin operations, and order fulfillment. It also features AI-powered product description and image generation using GPT-4 and DALL·E.
 
-> [!NOTE]
-> This is not meant to be an example of perfect code to be used in production, but more about showing a realistic application running in kubernetes. 
+This project is a customized version of the **Algonquin Pet Store (On Steroids)** architecture, with key improvements:
+- 📨 Replaced RabbitMQ with **Azure Service Bus**
+- 🤖 Added AI-Service using **Azure OpenAI (GPT-4 + DALL·E)**
 
-## Architecture
+---
 
-The application has the following services: 
+## 🧱 Application Architecture
 
-| Service | Description | Github Repo |
-| --- | --- | --- |
-| `store-front` | Web app for customers to place orders (Vue.js) | [store-front-L8](https://github.com/ramymohamed10/store-front-L8) |
-| `store-admin` | Web app used by store employees to view orders in queue and manage products (Vue.js) | [store-admin-L8](https://github.com/ramymohamed10/store-admin-L8) |
-| `order-service` | This service is used for placing orders (Javascript) | [order-service-L8](https://github.com/ramymohamed10/order-service-L8) |
-| `product-service` | This service is used to perform CRUD operations on products (Rust) | [product-service-L8](https://github.com/ramymohamed10/product-service-L8) |
-| `makeline-service` | This service handles processing orders from the queue and completing them (Golang) | [makeline-service-L8](https://github.com/ramymohamed10/makeline-service-L8) |
-| `ai-service` | Optional service for adding generative text and graphics creation (Python) | [ai-service-L8](https://github.com/ramymohamed10/ai-service-L8) |
-| `rabbitmq` | RabbitMQ for an order queue | [rabbitmq](https://github.com/docker-library/rabbitmq) |
-| `mongodb` | MongoDB instance for persisted data | [mongodb](https://github.com/docker-library/mongo) |
-| `virtual-customer` | Simulates order creation on a scheduled basis (Rust) | [virtual-customer-L8](https://github.com/ramymohamed10/virtual-customer-L8) |
-| `virtual-worker` | Simulates order completion on a scheduled basis (Rust) | [virtual-worker-L8](https://github.com/ramymohamed10/virtual-worker-L8) |
+![Architecture Diagram](./assets/architecture-diagram.png)
 
+The architecture consists of multiple microservices deployed on a Kubernetes cluster:
 
-![Logical Application Architecture Diagram](assets/Algonquin%20Pet%20Store%20On%20Steroids.png)
+| Component        | Description                                      |
+|------------------|--------------------------------------------------|
+| Store-Front      | Customer-facing UI for product browsing & orders |
+| Store-Admin      | Admin UI for managing products & viewing orders  |
+| Product-Service  | Handles product CRUD operations                  |
+| Order-Service    | Sends order details to Azure Service Bus         |
+| Makeline-Service | Consumes from Azure Service Bus and completes orders |
+| AI-Service       | Uses GPT-4 for descriptions & DALL·E for images  |
+| MongoDB          | Stores product and order data                    |
 
-## Run the app on Azure Kubernetes Service (AKS)
+---
 
-You can use the kubernetes YAML files provided in the [Deployment Files](./Deployment%20Files/) folder to deploy the app to an AKS cluster.
+## 🚀 Deployment Instructions
 
+Follow these steps to deploy the application to a Kubernetes cluster.
 
+### 🔧 Prerequisites
 
+- Kubernetes cluster (e.g., Azure Kubernetes Service or Minikube)
+- `kubectl` configured to target your cluster
+- Docker Hub or Azure Container Registry access
+- Azure Service Bus queue created
+- Azure OpenAI resource provisioned
+
+### 📤 Deploy to Kubernetes
+
+```bash
+# Step 1: Apply ConfigMaps and Secrets
+kubectl apply -f Deployment\ Files/configmaps.yaml
+kubectl apply -f Deployment\ Files/secrets.yaml
+
+# Step 2: Deploy MongoDB
+kubectl apply -f Deployment\ Files/mongo-statefulset.yaml
+
+# Step 3: Deploy microservices
+kubectl apply -f Deployment\ Files/store-front-deployment.yaml
+kubectl apply -f Deployment\ Files/store-admin-deployment.yaml
+kubectl apply -f Deployment\ Files/product-service-deployment.yaml
+kubectl apply -f Deployment\ Files/order-service-deployment.yaml
+kubectl apply -f Deployment\ Files/makeline-service-deployment.yaml
+kubectl apply -f Deployment\ Files/ai-service-deployment.yaml
+
+# Step 4: Expose services (use Ingress or NodePort)
+kubectl apply -f Deployment\ Files/ingress.yaml
+```
+
+---
+
+## 🔗 Microservice Repositories
+
+| Service           | Repository Link                   |
+|-------------------|-----------------------------------|
+| Store-Front       | [GitHub Link]                     |
+| Store-Admin       | [GitHub Link]                     |
+| Product-Service   | [GitHub Link]                     |
+| Order-Service     | [GitHub Link]                     |
+| Makeline-Service  | [GitHub Link]                     |
+| AI-Service        | [GitHub Link]                     |
+
+---
+
+## 🐳 Docker Images
+
+| Service           | Docker Image Link                 |
+|-------------------|-----------------------------------|
+| Store-Front       | [Docker Hub Link]                 |
+| Store-Admin       | [Docker Hub Link]                 |
+| Product-Service   | [Docker Hub Link]                 |
+| Order-Service     | [Docker Hub Link]                 |
+| Makeline-Service  | [Docker Hub Link]                 |
+| AI-Service        | [Docker Hub Link]                 |
+
+---
+
+## 📹 Demo Video
+
+Watch the 5-minute demo here:  
+🔗 [YouTube Demo Link](https://youtube.com/example-demo)
+
+---
+
+## ⚠️ Known Issues or Limitations
+
+- AI-Service requires a stable internet connection and valid API keys.
+- Limited error-handling in the demo version.
+- Orders may take a few seconds to process via the queue.
+
+---
+
+## 📁 Deployment Files
+
+All Kubernetes YAML files are located in the `/Deployment Files` folder.
+
+```
+Deployment Files/
+├── ai-service-deployment.yaml
+├── configmaps.yaml
+├── ingress.yaml
+├── makeline-service-deployment.yaml
+├── mongo-statefulset.yaml
+├── order-service-deployment.yaml
+├── product-service-deployment.yaml
+├── secrets.yaml
+├── store-admin-deployment.yaml
+└── store-front-deployment.yaml
+```
