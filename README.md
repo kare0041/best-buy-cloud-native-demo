@@ -2,11 +2,12 @@
 
 ## 📦 Project Overview
 
-This cloud-native application simulates Best Buy’s online store using a microservices architecture. The application supports product browsing, ordering, admin operations, and order fulfillment. It also features AI-powered product description and image generation using GPT-4 and DALL·E.
+This cloud-native application simulates Best Buy’s online cloud-native application, using a microservices architecture. The application supports product browsing, ordering, admin operations, and order fulfillment. It also features AI-powered product description and image generation using GPT-4 and DALL·E.
 
 This project is a customized version of the **Algonquin Pet Store (On Steroids)** architecture, with key improvements:
-- 📨 Replaced RabbitMQ with **Azure Service Bus**
-- 🤖 Added AI-Service using **Azure OpenAI (GPT-4 + DALL·E)**
+- Slightly modified the store-front and store-admin user interface to reflect best buy related products
+- Replaced RabbitMQ with **Azure Service Bus**
+- Added AI-Service using **Azure OpenAI (GPT-4 + DALL·E)**
 
 ---
 
@@ -34,7 +35,7 @@ Follow these steps to deploy the application to a Kubernetes cluster.
 
 ### 🔧 Prerequisites
 
-- Kubernetes cluster (e.g., Azure Kubernetes Service or Minikube)
+- Kubernetes cluster(Azure Kubernetes Service)
 - `kubectl` configured to target your cluster
 - Docker Hub or Azure Container Registry access
 - Azure Service Bus queue created
@@ -47,20 +48,10 @@ Follow these steps to deploy the application to a Kubernetes cluster.
 kubectl apply -f Deployment\ Files/configmaps.yaml
 kubectl apply -f Deployment\ Files/secrets.yaml
 
-# Step 2: Deploy MongoDB
-kubectl apply -f Deployment\ Files/mongo-statefulset.yaml
 
-# Step 3: Deploy microservices
-kubectl apply -f Deployment\ Files/store-front-deployment.yaml
-kubectl apply -f Deployment\ Files/store-admin-deployment.yaml
-kubectl apply -f Deployment\ Files/product-service-deployment.yaml
-kubectl apply -f Deployment\ Files/order-service-deployment.yaml
-kubectl apply -f Deployment\ Files/makeline-service-deployment.yaml
-kubectl apply -f Deployment\ Files/ai-service-deployment.yaml
 
-# Step 4: Expose services (use Ingress or NodePort)
-kubectl apply -f Deployment\ Files/ingress.yaml
-```
+# Step 2: Deploy microservices
+kubectl apply -f Deployment\ Files/aps-all-in-one.yaml
 
 ---
 
@@ -99,7 +90,6 @@ Watch the 5-minute demo here:
 
 ## ⚠️ Known Issues or Limitations
 
-- AI-Service requires a stable internet connection and valid API keys.
-- Limited error-handling in the demo version.
-- Orders may take a few seconds to process via the queue.
+- GPT-4 AI-Service is not generating product descriptions accordingly.
+- Integration with Azure Service Bus is not working as expected, after upding the aps-all-in-one.yaml file with ORDER_QUEUE environment variables.
 
