@@ -12,7 +12,7 @@ This project is a customized version of the **Algonquin Pet Store (On Steroids)*
 
 ## 🧱 Application Architecture
 
-![Architecture Diagram](./assets/architecture-diagram.png)
+![Best buy cloud native demo Architecture Diagram](./assets/best-buy-demo-cloud-native.png)
 
 The architecture consists of multiple microservices deployed on a Kubernetes cluster:
 
