@@ -93,7 +93,7 @@ kubectl apply -f Deployment\ Files/ingress.yaml
 ## 📹 Demo Video
 
 Watch the 5-minute demo here:  
-🔗 [YouTube Demo Link](https://youtube.com/example-demo)
+🔗 [YouTube Demo Link](https://youtu.be/I0-3yg4N6v4)
 
 ---
 
