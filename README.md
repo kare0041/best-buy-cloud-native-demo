@@ -52,7 +52,7 @@ kubectl apply -f Deployment\ Files/secrets.yaml
 
 # Step 2: Deploy microservices
 kubectl apply -f Deployment\ Files/aps-all-in-one.yaml
-
+```
 ---
 
 ## 🔗 Microservice Repositories
