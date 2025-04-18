@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bestbuy-staff-service-deployment
+  labels:
+    app: bestbuy-staff-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bestbuy-staff-service
+  template:
+    metadata:
+      labels:
+        app: bestbuy-staff-service
+    spec:
+      containers:
+      - name: bestbuy-staff-service
+        image: kadanielo/bestbuy-staff-service:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: PORT
+          value: "5000"
+        - name: DEBUG
+          value: "True"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bestbuy-staff-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: bestbuy-staff-service
+  ports:
+  - port: 80
+    targetPort: 5000

@@ -68,12 +68,12 @@ kubectl apply -f Deployment\ Files/ingress.yaml
 
 | Service           | Repository Link                   |
 |-------------------|-----------------------------------|
-| Store-Front       | [GitHub Link]                     |
-| Store-Admin       | [GitHub Link]                     |
-| Product-Service   | [GitHub Link]                     |
-| Order-Service     | [GitHub Link]                     |
-| Makeline-Service  | [GitHub Link]                     |
-| AI-Service        | [GitHub Link]                     |
+| Store-Front       | [https://github.com/kare0041/store-front-best-buy.git]                     |
+| Store-Admin       | [https://github.com/kare0041/store-admin-best-buy.git]                     |
+| Product-Service   | [https://github.com/kare0041/product-service-best-buy.git]                     |
+| Order-Service     | [https://github.com/kare0041/order-service-best-buy.git]                     |
+| Makeline-Service  | [https://github.com/kare0041/makeline-service-best-buy.git]                     |
+| AI-Service        | [https://github.com/kare0041/ai-service-best-buy.git]                     |
 
 ---
 
@@ -81,12 +81,12 @@ kubectl apply -f Deployment\ Files/ingress.yaml
 
 | Service           | Docker Image Link                 |
 |-------------------|-----------------------------------|
-| Store-Front       | [Docker Hub Link]                 |
-| Store-Admin       | [Docker Hub Link]                 |
-| Product-Service   | [Docker Hub Link]                 |
-| Order-Service     | [Docker Hub Link]                 |
-| Makeline-Service  | [Docker Hub Link]                 |
-| AI-Service        | [Docker Hub Link]                 |
+| Store-Front       | [https://hub.docker.com/repository/docker/kadanielo/store-front-best-buy/general]                 |
+| Store-Admin       | [https://hub.docker.com/repository/docker/kadanielo/store-admin-best-buy/general]                 |
+| Product-Service   | [https://hub.docker.com/repository/docker/kadanielo/product-service-best-buy/general]                 |
+| Order-Service     | [https://hub.docker.com/repository/docker/kadanielo/order-service-best-buy/general]                 |
+| Makeline-Service  | [https://hub.docker.com/repository/docker/kadanielo/makeline-service-best-buy/general]                 |
+| AI-Service        | [https://hub.docker.com/repository/docker/kadanielo/ai-service-best-buy/general]                 |
 
 ---
 
@@ -103,22 +103,3 @@ Watch the 5-minute demo here:
 - Limited error-handling in the demo version.
 - Orders may take a few seconds to process via the queue.
 
----
-
-## 📁 Deployment Files
-
-All Kubernetes YAML files are located in the `/Deployment Files` folder.
-
-```
-Deployment Files/
-├── ai-service-deployment.yaml
-├── configmaps.yaml
-├── ingress.yaml
-├── makeline-service-deployment.yaml
-├── mongo-statefulset.yaml
-├── order-service-deployment.yaml
-├── product-service-deployment.yaml
-├── secrets.yaml
-├── store-admin-deployment.yaml
-└── store-front-deployment.yaml
-```
